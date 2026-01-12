@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Academy - Apprends l'Intelligence Artificielle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #EFF6FF 0%, #F0FDFA 50%, #ECFDF5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 120px;
+            margin-bottom: 32px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            font-size: 56px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #3B82F6, #14B8A6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            color: #6B7280;
+            margin-bottom: 64px;
+            line-height: 1.6;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+        }
+        
+        .card-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+        
+        .card-description {
+            font-size: 18px;
+            color: #6B7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .card-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #3B82F6, #14B8A6);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .card:hover .card-button {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .info-box {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #3B82F6;
+        }
+        
+        .info-box p {
+            font-size: 16px;
+            color: #374151;
+            line-height: 1.6;
+        }
+        
+        footer {
+            margin-top: 64px;
+            color: #6B7280;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 80px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🤖</div>
+        
+        <h1>Bienvenue sur IA Academy</h1>
+        
+        <p class="subtitle">
+            Découvre l'intelligence artificielle et apprends à l'utiliser de manière responsable !<br>
+            Un site pédagogique conçu pour les élèves de 3ème.
+        </p>
+        
+        <div class="cards">
+            <a href="page-decouvre-finale.html" class="card">
+                <div class="card-icon">📚</div>
+                <div class="card-title">Découvre</div>
+                <div class="card-description">
+                    Un parcours complet en 5 étapes pour tout comprendre sur l'IA : son fonctionnement, ses usages et comment bien l'utiliser.
+                </div>
+                <div class="card-button">Commencer le parcours →</div>
+            </a>
+            
+            <a href="page-pratique-finale.html" class="card">
+                <div class="card-icon">🎮</div>
+                <div class="card-title">Pratique</div>
+                <div class="card-description">
+                    Des activités interactives pour mettre en pratique tes connaissances : quiz, exercices et défis !
+                </div>
+                <div class="card-button">S'entraîner maintenant →</div>
+            </a>
+        </div>
+        
+        <div class="info-box">
+            <p>
+                <strong>💡 Comment utiliser ce site ?</strong><br>
+                Commence par la section <strong>Découvre</strong> pour apprendre les bases, puis passe à <strong>Pratique</strong> pour tester tes connaissances avec des activités amusantes !
+            </p>
+        </div>
+        
+        <footer>
+            🤖 IA Academy - Site pédagogique sur l'intelligence artificielle
+        </footer>
+    </div>
+</body>
+</html>
