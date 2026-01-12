@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratique - IA Academy</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif;">
+    <div id="root"></div>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        // MAIN APP
+        const App = () => {
+          const [currentView, setCurrentView] = useState('home');
+          
+          return (
+            <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #EFF6FF 0%, #F0FDFA 50%, #ECFDF5 100%)' }}>
+              <Header />
+              {currentView === 'home' && <HomePage setView={setCurrentView} />}
+              {currentView === 'glossaire' && <Glossaire setView={setCurrentView} />}
+              {currentView === 'miniquiz' && <MiniQuiz setView={setCurrentView} />}
+              {currentView === 'prompts' && <Prompts setView={setCurrentView} />}
+              {currentView === 'vraifaux' && <VraiFaux setView={setCurrentView} />}
+              <Footer />
+            </div>
+          );
+        };
+
+        // HEADER
+        const Header = () => (
+          <header style={{ position: 'sticky', top: 0, zIndex: 1000, background: 'white', borderBottom: '2px solid #3B82F6', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+            <div style={{ maxWidth: '1152px', margin: '0 auto', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ fontSize: '24px', fontWeight: 'bold', background: 'linear-gradient(90deg, #3B82F6, #14B8A6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>🤖 IA Academy</div>
+              <nav style={{ display: 'flex', gap: '12px' }}>
+                <a href="page-decouvre-finale.html" style={{ background: 'linear-gradient(90deg, #3B82F6, #14B8A6)', color: 'white', padding: '10px 24px', borderRadius: '12px', fontWeight: '600', fontSize: '14px', textDecoration: 'none' }}>Découvre</a>
+                <a href="page-pratique-finale.html" style={{ background: 'linear-gradient(90deg, #3B82F6, #14B8A6)', color: 'white', padding: '10px 24px', borderRadius: '12px', fontWeight: '600', fontSize: '14px', textDecoration: 'none' }}>Pratique</a>
+              </nav>
+            </div>
+          </header>
+        );
+
+        // FOOTER
+        const Footer = () => (
+          <footer style={{ background: '#111827', color: 'white', padding: '40px 24px', textAlign: 'center', marginTop: '64px' }}>
+            <p style={{ fontSize: '16px' }}>🤖 IA Academy - Apprends l'intelligence artificielle</p>
+          </footer>
+        );
+
+        // HOME PAGE
+        const HomePage = ({ setView }) => (
+          <div>
+            <section style={{ background: 'linear-gradient(135deg, #EFF6FF 0%, #F0FDFA 100%)', padding: '80px 24px', textAlign: 'center' }}>
+              <h1 style={{ fontSize: '56px', fontWeight: 'bold', color: '#111827', marginBottom: '24px' }}>🎮 Pratique</h1>
+              <p style={{ fontSize: '20px', color: '#6B7280' }}>Mets en pratique tes connaissances avec des activités interactives !</p>
+            </section>
+            
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '64px 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
+              {[
+                { icon: '📖', title: 'Glossaire interactif', desc: 'Découvre les 7 mots-clés essentiels de l\'IA', view: 'glossaire' },
+                { icon: '✅', title: 'Mini-quiz par étape', desc: '5 mini-quiz de 3 questions pour vérifier tes connaissances', view: 'miniquiz' },
+                { icon: '✍️', title: 'Améliore tes prompts', desc: '5 exercices pour transformer des mauvais prompts en bons prompts', view: 'prompts' },
+                { icon: '⚡', title: 'Quiz Vrai ou Faux', desc: '10 questions rapides pour tester tes connaissances', view: 'vraifaux' }
+              ].map((activity, i) => (
+                <div key={i} onClick={() => setView(activity.view)} style={{ background: 'white', borderRadius: '16px', padding: '32px', boxShadow: '0 10px 15px rgba(0,0,0,0.1)', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 25px rgba(0,0,0,0.15)'; }} onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 15px rgba(0,0,0,0.1)'; }}>
+                  <div style={{ fontSize: '64px', marginBottom: '16px' }}>{activity.icon}</div>
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#111827', marginBottom: '12px' }}>{activity.title}</div>
+                  <div style={{ fontSize: '16px', color: '#6B7280', marginBottom: '16px' }}>{activity.desc}</div>
+                  <button style={{ background: 'linear-gradient(90deg, #3B82F6, #14B8A6)', color: 'white', padding: '12px 24px', borderRadius: '12px', fontWeight: '600', border: 'none', cursor: 'pointer', width: '100%', fontSize: '16px' }}>Commencer →</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+        // GLOSSAIRE (version simplifiée intégrée)
+        const Glossaire = ({ setView }) => {
+          const [open, setOpen] = useState(null);
+          const terms = [
+            { term: "Fonctions cognitives", def: "Capacités de notre cerveau qui nous permettent de penser, d'apprendre et de comprendre.", icon: "🧠", ex: "Mémoriser une leçon, faire un calcul mental" },
+            { term: "Intelligence artificielle", def: "Capacité d'un ordinateur à faire des tâches qui demandent de l'intelligence humaine.", icon: "🤖", ex: "Siri, filtres Snapchat, recommandations Netflix" },
+            { term: "Algorithmes", def: "Série d'instructions précises, comme une recette de cuisine pour ordinateur.", icon: "📋", ex: "Trier des nombres du plus petit au plus grand" },
+            { term: "Informatique", def: "Science des ordinateurs et du traitement automatique de l'information.", icon: "💻", ex: "Programmation, réseaux, cybersécurité" },
+            { term: "Machine", def: "Ordinateur ou système capable d'exécuter des programmes et d'apprendre.", icon: "⚙️", ex: "Ton ordinateur, smartphone, un robot" },
+            { term: "Apprentissage numérique", def: "Capacité d'un système à apprendre automatiquement à partir de données.", icon: "📚", ex: "Filtre anti-spam qui apprend" },
+            { term: "Intelligence biologique", def: "Intelligence naturelle avec émotions, intuition et créativité.", icon: "🌱", ex: "Empathie, imagination, humour" }
+          ];
+          
+          return (
+            <div style={{ maxWidth: '900px', margin: '0 auto', padding: '64px 24px' }}>
+              <button onClick={() => setView('home')} style={{ background: 'white', border: '2px solid #E5E7EB', borderRadius: '12px', padding: '12px 24px', cursor: 'pointer', marginBottom: '32px' }}>← Retour</button>
+              <h2 style={{ fontSize: '42px', textAlign: 'center', marginBottom: '48px' }}>📖 Les mots-clés de l'IA</h2>
+              {terms.map((t, i) => (
+                <div key={i} style={{ background: 'white', borderRadius: '12px', marginBottom: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', border: open === i ? '2px solid #3B82F6' : 'none' }}>
+                  <button onClick={() => setOpen(open === i ? null : i)} style={{ width: '100%', background: open === i ? 'linear-gradient(135deg, #EFF6FF, #F0FDFA)' : 'white', border: 'none', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '16px', cursor: 'pointer' }}>
+                    <span style={{ fontSize: '28px' }}>{t.icon}</span>
+                    <span style={{ flex: 1, textAlign: 'left', fontSize: '18px', fontWeight: 'bold' }}>{t.term}</span>
+                    <span style={{ fontSize: '20px', color: '#3B82F6', transform: open === i ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s' }}>▼</span>
+                  </button>
+                  {open === i && (
+                    <div style={{ padding: '20px 24px', borderTop: '1px solid #E5E7EB' }}>
+                      <p style={{ fontSize: '16px', marginBottom: '12px' }}><strong>💡 Définition :</strong> {t.def}</p>
+                      <p style={{ fontSize: '14px', background: '#DCFCE7', padding: '12px', borderRadius: '8px' }}><strong>🎯 Exemple :</strong> {t.ex}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          );
+        };
+
+        // MINI QUIZ (version complète simplifiée)
+        const MiniQuiz = ({ setView }) => {
+          const [quiz, setQuiz] = useState(0);
+          const [q, setQ] = useState(0);
+          const [sel, setSel] = useState(null);
+          const [show, setShow] = useState(false);
+          
+          const quizzes = [
+            { title: "C'est quoi l'IA ?", qs: [
+              { q: "Qu'est-ce que l'IA ?", opts: ["Un robot", "Un programme qui apprend", "Un ordinateur", "Une app"], ans: 1, exp: "L'IA est un programme qui apprend à faire des tâches intelligentes." },
+              { q: "Différence IA vs humain ?", opts: ["L'IA est plus rapide", "L'humain a des émotions", "L'IA ne se trompe pas", "Aucune"], ans: 1, exp: "L'humain a des émotions et une conscience, pas l'IA." },
+              { q: "Pas une utilisation d'IA ?", opts: ["Netflix", "Livre papier", "Siri", "Filtres"], ans: 1, exp: "Un livre papier n'utilise pas l'IA !" }
+            ]},
+            { title: "Comment ça marche ?", qs: [
+              { q: "Qu'est-ce qu'un algorithme ?", opts: ["Un ordinateur", "Des instructions", "Une donnée", "Un programme"], ans: 1, exp: "Un algorithme = suite d'instructions, comme une recette." },
+              { q: "De quoi l'IA a besoin ?", opts: ["Ordinateur seul", "Données + algorithmes + puissance", "Robot", "Internet"], ans: 1, exp: "L'IA a besoin de données, algorithmes ET puissance de calcul." },
+              { q: "Comment l'IA apprend ?", opts: ["Tout programmé", "Au hasard", "Analyse d'exemples", "Copie humains"], ans: 2, exp: "L'IA analyse des milliers d'exemples et trouve des motifs." }
+            ]},
+            { title: "L'IA dans ta vie", qs: [
+              { q: "Domaine sans IA ?", opts: ["Médecine", "Agriculture", "Aucun", "Transports"], ans: 2, exp: "L'IA est dans TOUS les domaines aujourd'hui !" },
+              { q: "TikTok utilise l'IA pour ?", opts: ["Proposer des vidéos", "Créer les vidéos", "Remplacer créateurs", "N'utilise pas"], ans: 0, exp: "TikTok analyse tes goûts pour suggérer des vidéos." },
+              { q: "Danger réel de l'IA ?", opts: ["Contrôle du monde", "Deepfakes", "Lire tes pensées", "Remplace tout"], ans: 1, exp: "Les deepfakes créent de fausses vidéos très réalistes." }
+            ]},
+            { title: "Les bons prompts", qs: [
+              { q: "Meilleur prompt ?", opts: ["Parle d'histoire", "Écris un texte", "Explique causes WW1 en 5 points pour 3ème", "Trucs sur guerre"], ans: 2, exp: "Précis + contexte + format = bon prompt !" },
+              { q: "Élément facultatif ?", opts: ["Précision", "Contexte", "Format", "Emojis"], ans: 3, exp: "Les emojis c'est sympa mais pas obligatoire !" },
+              { q: "Si résultat pas bon ?", opts: ["Abandonner", "Améliorer le prompt", "Copier quand même", "Changer d'IA"], ans: 1, exp: "Améliore ton prompt et réessaye, c'est itératif !" }
+            ]},
+            { title: "Usage responsable", qs: [
+              { q: "Usage acceptable ?", opts: ["Copier rédaction", "Demander explication puis reformuler", "Tous les devoirs", "Partager infos perso"], ans: 1, exp: "Utilise l'IA pour COMPRENDRE, puis fais le travail !" },
+              { q: "Pourquoi vérifier ?", opts: ["Toujours fiable", "Peut se tromper (hallucinations)", "Perdre temps", "Profs l'exigent"], ans: 1, exp: "L'IA peut inventer des faits qui semblent vrais !" },
+              { q: "Bloqué en maths, bon prompt ?", opts: ["Donne-moi la réponse", "Explique la méthode étape par étape", "Fais l'exercice", "Réponds direct"], ans: 1, exp: "Demande la MÉTHODE, pas la réponse directe !" }
+            ]}
+          ];
+          
+          const curr = quizzes[quiz];
+          const currQ = curr.qs[q];
+          
+          return (
+            <div style={{ maxWidth: '800px', margin: '0 auto', padding: '64px 24px' }}>
+              <button onClick={() => setView('home')} style={{ background: 'white', border: '2px solid #E5E7EB', borderRadius: '12px', padding: '12px 24px', cursor: 'pointer', marginBottom: '32px' }}>← Retour</button>
+              <h2 style={{ fontSize: '42px', textAlign: 'center', marginBottom: '24px' }}>✅ Mini-Quiz : {curr.title}</h2>
+              <p style={{ textAlign: 'center', marginBottom: '32px' }}>Question {q + 1}/3</p>
+              
+              <div style={{ background: 'white', borderRadius: '24px', padding: '40px', boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}>
+                <h3 style={{ fontSize: '24px', marginBottom: '32px' }}>{currQ.q}</h3>
+                {currQ.opts.map((opt, i) => (
+                  <button key={i} onClick={() => { if (!show) { setSel(i); setShow(true); }}} disabled={show} style={{ width: '100%', background: show && i === currQ.ans ? '#DCFCE7' : show && i === sel && i !== currQ.ans ? '#FEE2E2' : sel === i ? '#EFF6FF' : 'white', border: `2px solid ${show && i === currQ.ans ? '#86EFAC' : show && i === sel && i !== currQ.ans ? '#FCA5A5' : sel === i ? '#3B82F6' : '#E5E7EB'}`, borderRadius: '12px', padding: '16px', marginBottom: '12px', textAlign: 'left', cursor: show ? 'default' : 'pointer', fontSize: '16px' }}>
+                    {opt}
+                  </button>
+                ))}
+                
+                {show && (
+                  <div style={{ marginTop: '24px', padding: '20px', background: sel === currQ.ans ? '#DCFCE7' : '#FEE2E2', borderRadius: '12px' }}>
+                    <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>{sel === currQ.ans ? '🎉 Bravo !' : '❌ Pas tout à fait...'}</p>
+                    <p>{currQ.exp}</p>
+                    <button onClick={() => { if (q < 2) { setQ(q + 1); setSel(null); setShow(false); } else if (quiz < 4) { setQuiz(quiz + 1); setQ(0); setSel(null); setShow(false); } else { setView('home'); }}} style={{ marginTop: '16px', background: 'linear-gradient(90deg, #F97316, #F59E0B)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', width: '100%', fontWeight: '600' }}>
+                      {q < 2 ? 'Question suivante →' : quiz < 4 ? 'Quiz suivant →' : 'Terminé ! 🎉'}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        };
+
+        // PROMPTS (version simplifiée)
+        const Prompts = ({ setView }) => {
+          const [ex, setEx] = useState(0);
+          const [input, setInput] = useState('');
+          const [show, setShow] = useState(false);
+          
+          const exercises = [
+            { bad: "Écris une histoire", good: "Écris une histoire fantastique de 300 mots pour 3ème avec héros de 14 ans qui découvre des pouvoirs magiques. Style dynamique avec dialogues." },
+            { bad: "C'est quoi la photosynthèse ?", good: "Explique la photosynthèse en 3 paragraphes simples (80 mots) pour 3ème : 1) Définition 2) Étapes 3) Importance. Vocabulaire accessible + 2 exemples de plantes." },
+            { bad: "Aide-moi pour mon devoir de maths", good: "Je suis en 3ème, bloqué sur proportionnalité : Si 3 kg de pommes = 9€, combien coûtent 5 kg ? Explique la MÉTHODE étape par étape, pas la réponse finale." },
+            { bad: "Fais-moi une image cool", good: "Crée une image d'astronaute réparant un satellite dans l'espace, avec Terre en arrière-plan et ISS au loin. Style réaliste coloré, éclairage dramatique du Soleil." },
+            { bad: "Résume ce texte", good: "Résume cet article sur réchauffement climatique en 5 points (bullet points), 1 phrase max 20 mots par point. Focus : causes, conséquences, solutions. Langage simple 3ème." }
+          ];
+          
+          const curr = exercises[ex];
+          
+          return (
+            <div style={{ maxWidth: '900px', margin: '0 auto', padding: '64px 24px' }}>
+              <button onClick={() => setView('home')} style={{ background: 'white', border: '2px solid #E5E7EB', borderRadius: '12px', padding: '12px 24px', cursor: 'pointer', marginBottom: '32px' }}>← Retour</button>
+              <h2 style={{ fontSize: '42px', textAlign: 'center', marginBottom: '24px' }}>✍️ Améliore ce prompt</h2>
+              <p style={{ textAlign: 'center', marginBottom: '32px' }}>Exercice {ex + 1}/5</p>
+              
+              <div style={{ background: 'white', borderRadius: '24px', padding: '40px', boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}>
+                <div style={{ background: '#FEE2E2', border: '2px solid #FCA5A5', borderRadius: '12px', padding: '20px', marginBottom: '24px' }}>
+                  <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>❌ Mauvais prompt :</p>
+                  <p style={{ fontStyle: 'italic' }}>"{curr.bad}"</p>
+                </div>
+                
+                {!show && (
+                  <>
+                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '12px' }}>✅ Ta version améliorée :</label>
+                    <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Écris ton prompt amélioré ici..." style={{ width: '100%', minHeight: '120px', padding: '16px', fontSize: '16px', border: '2px solid #E5E7EB', borderRadius: '12px', fontFamily: 'inherit' }} />
+                    <button onClick={() => setShow(true)} disabled={input.length < 10} style={{ marginTop: '16px', background: input.length < 10 ? '#E5E7EB' : 'linear-gradient(90deg, #3B82F6, #14B8A6)', color: input.length < 10 ? '#9CA3AF' : 'white', border: 'none', padding: '14px 32px', borderRadius: '12px', cursor: input.length < 10 ? 'not-allowed' : 'pointer', fontWeight: '600' }}>
+                      Voir la solution →
+                    </button>
+                  </>
+                )}
+                
+                {show && (
+                  <>
+                    <div style={{ background: '#DCFCE7', border: '2px solid #86EFAC', borderRadius: '12px', padding: '20px', marginBottom: '24px' }}>
+                      <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>✅ Exemple de bon prompt :</p>
+                      <p>"{curr.good}"</p>
+                    </div>
+                    <button onClick={() => { if (ex < 4) { setEx(ex + 1); setInput(''); setShow(false); } else { setView('home'); }}} style={{ width: '100%', background: 'linear-gradient(90deg, #F97316, #F59E0B)', color: 'white', border: 'none', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: '600' }}>
+                      {ex < 4 ? 'Exercice suivant →' : 'Terminé ! 🎉'}
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          );
+        };
+
+        // VRAI/FAUX (version complète)
+        const VraiFaux = ({ setView }) => {
+          const [q, setQ] = useState(0);
+          const [sel, setSel] = useState(null);
+          const [show, setShow] = useState(false);
+          const [score, setScore] = useState(0);
+          const [done, setDone] = useState(false);
+          
+          const questions = [
+            { q: "L'IA a des émotions comme les humains", ans: false, exp: "FAUX ! L'IA n'a pas d'émotions ni de conscience." },
+            { q: "L'IA peut se tromper et inventer des informations", ans: true, exp: "VRAI ! Ce sont les 'hallucinations' de l'IA." },
+            { q: "Copier-coller une rédaction ChatGPT, c'est de la triche", ans: true, exp: "VRAI ! C'est du plagiat, tu n'apprends rien." },
+            { q: "Plus un prompt est vague, meilleur sera le résultat", ans: false, exp: "FAUX ! Plus c'est précis, mieux c'est." },
+            { q: "L'IA est utilisée uniquement dans l'informatique", ans: false, exp: "FAUX ! L'IA est partout : médecine, agriculture, arts..." },
+            { q: "Un algorithme, c'est comme une recette de cuisine", ans: true, exp: "VRAI ! C'est une suite d'instructions à suivre." },
+            { q: "On peut partager ses infos personnelles avec l'IA sans risque", ans: false, exp: "FAUX ! JAMAIS tes infos personnelles avec l'IA." },
+            { q: "L'IA apprend en analysant des milliers d'exemples", ans: true, exp: "VRAI ! C'est l'apprentissage automatique." },
+            { q: "Demander à l'IA d'expliquer puis reformuler soi-même, c'est bon", ans: true, exp: "VRAI ! Tu utilises l'IA pour COMPRENDRE puis tu travailles." },
+            { q: "L'IA va remplacer tous les humains dans tous les métiers", ans: false, exp: "FAUX ! L'IA est un outil, pas un remplacement total." }
+          ];
+          
+          const currQ = questions[q];
+          
+          if (done) {
+            return (
+              <div style={{ maxWidth: '700px', margin: '0 auto', padding: '64px 24px', textAlign: 'center' }}>
+                <div style={{ background: 'white', borderRadius: '24px', padding: '48px', boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}>
+                  <div style={{ fontSize: '64px', marginBottom: '24px' }}>{score === 10 ? '🏆' : score >= 7 ? '🎉' : '💪'}</div>
+                  <h2 style={{ fontSize: '36px', marginBottom: '16px' }}>Quiz terminé !</h2>
+                  <div style={{ fontSize: '64px', fontWeight: 'bold', background: 'linear-gradient(90deg, #3B82F6, #14B8A6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '24px' }}>{score}/10</div>
+                  <button onClick={() => setView('home')} style={{ background: 'linear-gradient(90deg, #3B82F6, #14B8A6)', color: 'white', border: 'none', padding: '16px 40px', borderRadius: '12px', cursor: 'pointer', fontWeight: '600', fontSize: '18px' }}>Retour aux activités</button>
+                </div>
+              </div>
+            );
+          }
+          
+          return (
+            <div style={{ maxWidth: '800px', margin: '0 auto', padding: '64px 24px' }}>
+              <button onClick={() => setView('home')} style={{ background: 'white', border: '2px solid #E5E7EB', borderRadius: '12px', padding: '12px 24px', cursor: 'pointer', marginBottom: '32px' }}>← Retour</button>
+              <h2 style={{ fontSize: '42px', textAlign: 'center', marginBottom: '24px' }}>⚡ Vrai ou Faux ?</h2>
+              <p style={{ textAlign: 'center', marginBottom: '32px' }}>Question {q + 1}/10 - Score : {score}</p>
+              
+              <div style={{ background: 'white', borderRadius: '24px', padding: '48px', boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}>
+                <div style={{ fontSize: '64px', textAlign: 'center', marginBottom: '32px' }}>{show ? (sel === currQ.ans ? '✅' : '❌') : '🤔'}</div>
+                <p style={{ fontSize: '26px', fontWeight: 'bold', textAlign: 'center', marginBottom: '48px' }}>{currQ.q}</p>
+                
+                {!show && (
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                    <button onClick={() => { setSel(true); setShow(true); if (currQ.ans) setScore(score + 1); }} style={{ background: 'linear-gradient(135deg, #DCFCE7, #D1FAE5)', border: '3px solid #86EFAC', borderRadius: '16px', padding: '32px', cursor: 'pointer', fontSize: '28px', fontWeight: 'bold', color: '#065F46' }}>
+                      <div style={{ fontSize: '48px', marginBottom: '12px' }}>✓</div>
+                      VRAI
+                    </button>
+                    <button onClick={() => { setSel(false); setShow(true); if (!currQ.ans) setScore(score + 1); }} style={{ background: 'linear-gradient(135deg, #FEE2E2, #FECACA)', border: '3px solid #FCA5A5', borderRadius: '16px', padding: '32px', cursor: 'pointer', fontSize: '28px', fontWeight: 'bold', color: '#991B1B' }}>
+                      <div style={{ fontSize: '48px', marginBottom: '12px' }}>✗</div>
+                      FAUX
+                    </button>
+                  </div>
+                )}
+                
+                {show && (
+                  <div>
+                    <div style={{ background: sel === currQ.ans ? 'linear-gradient(135deg, #DCFCE7, #D1FAE5)' : 'linear-gradient(135deg, #FEE2E2, #FECACA)', padding: '24px', borderRadius: '16px', marginBottom: '32px' }}>
+                      <p style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '12px' }}>{sel === currQ.ans ? '🎉 Bravo !' : '😅 Pas tout à fait...'}</p>
+                      <p style={{ fontSize: '17px' }}>{currQ.exp}</p>
+                    </div>
+                    <button onClick={() => { if (q < 9) { setQ(q + 1); setSel(null); setShow(false); } else { setDone(true); }}} style={{ width: '100%', background: 'linear-gradient(90deg, #F97316, #F59E0B)', color: 'white', border: 'none', padding: '18px', borderRadius: '12px', cursor: 'pointer', fontWeight: '600', fontSize: '18px' }}>
+                      {q < 9 ? 'Question suivante →' : 'Voir mes résultats 🎯'}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

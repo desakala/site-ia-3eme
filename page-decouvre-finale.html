@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Découvre l'IA - IA Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #374151;
+        }
+        
+        /* Header Navigation */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            border-bottom: 2px solid #3B82F6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #3B82F6, #14B8A6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .nav-button {
+            background: linear-gradient(90deg, #3B82F6, #14B8A6);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #EFF6FF 0%, #F0FDFA 100%);
+            padding: 80px 24px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #DBEAFE;
+            color: #1E40AF;
+            padding: 8px 24px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #6B7280;
+            margin-bottom: 32px;
+        }
+        
+        /* Section générale */
+        .section {
+            padding: 80px 24px;
+        }
+        
+        .section-alt {
+            background: linear-gradient(135deg, #F0FDFA 0%, #ECFDF5 100%);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        h2 {
+            font-size: 42px;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+        
+        h3 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #111827;
+            margin: 32px 0 16px;
+        }
+        
+        .lead {
+            font-size: 18px;
+            color: #6B7280;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            margin-bottom: 32px;
+        }
+        
+        .content-card p {
+            font-size: 17px;
+            margin-bottom: 16px;
+        }
+        
+        .content-card ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+        
+        .content-card li {
+            font-size: 17px;
+            margin-bottom: 12px;
+            padding-left: 32px;
+            position: relative;
+        }
+        
+        .content-card li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+        
+        /* Mémo */
+        .memo-card {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border: 3px solid #FBBF24;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+        
+        .memo-card h4 {
+            font-size: 20px;
+            color: #92400E;
+            margin-bottom: 16px;
+            font-weight: bold;
+        }
+        
+        .memo-card p {
+            font-size: 16px;
+            color: #78350F;
+            margin-bottom: 12px;
+        }
+        
+        /* Video link */
+        .video-link {
+            color: #14B8A6;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+        
+        .video-link:hover {
+            color: #0D9488;
+        }
+        
+        /* Video container */
+        .video-container {
+            background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+            padding: 24px;
+            border-radius: 16px;
+            margin: 32px 0;
+            border: 2px solid #93C5FD;
+        }
+        
+        .video-container p {
+            font-size: 17px;
+            color: #1E40AF;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 32px;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .section {
+                padding: 48px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="brand">🤖 IA Academy</div>
+            <nav class="nav-menu">
+                <a href="page-decouvre-finale.html" class="nav-button">Découvre</a>
+                <a href="page-pratique-finale.html" class="nav-button">Pratique</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🎓 Bienvenue !</div>
+            <h1>Découvre l'Intelligence Artificielle</h1>
+            <p>Un parcours complet pour comprendre l'IA, apprendre à l'utiliser et devenir un utilisateur responsable</p>
+        </div>
+    </section>
+
+    <!-- ÉTAPE 1 : C'EST QUOI L'IA ? -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div style="background: linear-gradient(90deg, #3B82F6, #14B8A6); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">1</div>
+                </div>
+                <h2>🤖 C'est quoi l'IA ?</h2>
+                <p class="lead">Découvre ce qu'est l'intelligence artificielle</p>
+            </div>
+
+            <!-- VIDEO -->
+            <div class="video-container">
+                <p>
+                    📹 <strong>C'est quoi l'IA ?</strong> Voici une <a href="https://www.youtube.com/watch?v=yQLmgw3rClM&t=11s" class="video-link" target="_blank">vidéo</a> pour découvrir les dates clés de l'IA et son histoire.
+                </p>
+            </div>
+
+            <div class="content-card">
+                <h3>Définition simple</h3>
+                <p><strong>L'intelligence artificielle, c'est la capacité d'un programme informatique à faire des tâches qui demandent normalement de l'intelligence humaine.</strong></p>
+                
+                <p>Par exemple :</p>
+                <ul>
+                    <li>Reconnaître des visages sur des photos</li>
+                    <li>Comprendre et répondre quand tu parles (comme Siri ou Alexa)</li>
+                    <li>Jouer aux échecs ou aux jeux vidéo</li>
+                    <li>Créer des images à partir d'une description</li>
+                    <li>Écrire des textes, traduire des langues</li>
+                </ul>
+
+                <h3>Un peu d'histoire</h3>
+                <p><strong>1950</strong> : Alan Turing pose la question "Les machines peuvent-elles penser ?"</p>
+                <p><strong>1956</strong> : Le terme "Intelligence Artificielle" est inventé</p>
+                <p><strong>1997</strong> : Deep Blue (ordinateur IBM) bat le champion du monde d'échecs Garry Kasparov</p>
+                <p><strong>2011</strong> : Siri, l'assistant vocal d'Apple, est lancé</p>
+                <p><strong>2022</strong> : ChatGPT arrive et révolutionne l'accès à l'IA pour tous</p>
+
+                <h3>Différence IA vs Intelligence humaine</h3>
+                <p>L'IA n'est PAS comme l'intelligence humaine :</p>
+                <ul>
+                    <li><strong>L'IA</strong> : Suit des règles et algorithmes, analyse des données, pas d'émotions, pas de conscience</li>
+                    <li><strong>L'humain</strong> : A de l'intuition, des émotions, de l'empathie, une conscience, de la créativité spontanée</li>
+                </ul>
+
+                <h3>Exemples dans ton quotidien</h3>
+                <ul>
+                    <li><strong>Sur ton téléphone :</strong> Siri, reconnaissance faciale, correcteur automatique, traduction</li>
+                    <li><strong>Sur les réseaux sociaux :</strong> TikTok qui te suggère des vidéos, filtres Instagram, suggestions de comptes</li>
+                    <li><strong>À la maison :</strong> Netflix qui recommande des séries, Spotify qui crée des playlists</li>
+                    <li><strong>Dans le monde :</strong> Médecine (diagnostic), transports (voitures autonomes), agriculture, éducation</li>
+                </ul>
+            </div>
+
+            <div class="memo-card">
+                <h4>💡 MÉMO #1 - L'IA EN 4 POINTS</h4>
+                <p><strong>1️⃣</strong> L'IA = Programme qui apprend à faire des tâches intelligentes</p>
+                <p><strong>2️⃣</strong> Exemples : Siri, filtres, Netflix, traduction, jeux vidéo</p>
+                <p><strong>3️⃣</strong> ≠ Intelligence humaine (pas d'émotions, pas de conscience)</p>
+                <p><strong>4️⃣</strong> L'IA est partout : téléphone, réseaux sociaux, médecine, école</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÉTAPE 2 : COMMENT ÇA MARCHE ? -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div style="background: linear-gradient(90deg, #3B82F6, #14B8A6); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">2</div>
+                </div>
+                <h2>⚙️ Comment ça marche ?</h2>
+                <p class="lead">Comprendre le fonctionnement de l'IA</p>
+            </div>
+
+            <div class="content-card">
+                <h3>Les 3 ingrédients de l'IA</h3>
+                
+                <p><strong>1. Des données 📊</strong></p>
+                <p>Ce sont les exemples dont l'IA a besoin pour apprendre. Plus elle a d'exemples, mieux elle apprend !</p>
+                <p><em>Exemple :</em> Pour reconnaître des chats, l'IA doit voir des milliers de photos de chats.</p>
+
+                <p><strong>2. Des algorithmes 🧮</strong></p>
+                <p>C'est la "recette" que suit l'ordinateur. Un algorithme, c'est une série d'instructions précises, étape par étape.</p>
+                <p><em>Analogie :</em> Comme une recette de cuisine !</p>
+
+                <p><strong>3. De la puissance de calcul 💻</strong></p>
+                <p>Des ordinateurs puissants qui peuvent traiter énormément d'informations très rapidement.</p>
+
+                <h3>Comment l'IA apprend ?</h3>
+                <p><strong>Étape 1 :</strong> On montre des milliers d'exemples à l'IA avec les bonnes réponses</p>
+                <p><strong>Étape 2 :</strong> L'algorithme analyse et trouve des caractéristiques communes (motifs)</p>
+                <p><strong>Étape 3 :</strong> L'IA s'entraîne, teste, se trompe, apprend de ses erreurs</p>
+                <p><strong>Étape 4 :</strong> L'IA est prête ! Elle peut maintenant reconnaître de nouvelles choses</p>
+
+                <h3>Les limites de l'IA</h3>
+                <ul>
+                    <li>L'IA a besoin de beaucoup de données - sans exemples, elle ne peut pas apprendre</li>
+                    <li>L'IA répète ce qu'elle a appris - si les données sont biaisées, l'IA le sera aussi</li>
+                    <li>L'IA ne comprend pas vraiment - elle trouve des motifs mais ne "comprend" pas comme nous</li>
+                    <li>L'IA peut se tromper - elle fait parfois des erreurs, surtout sur des cas nouveaux</li>
+                </ul>
+            </div>
+
+            <div class="memo-card">
+                <h4>💡 MÉMO #2 - COMMENT ÇA MARCHE</h4>
+                <p><strong>📊 DONNÉES</strong> - Des milliers d'exemples pour apprendre</p>
+                <p><strong>🧮 ALGORITHMES</strong> - La "recette" : instructions étape par étape</p>
+                <p><strong>💻 PUISSANCE</strong> - Des ordinateurs très rapides</p>
+                <p><strong>📚 APPRENTISSAGE</strong> - L'IA voit des exemples, trouve des motifs, s'entraîne, puis peut prédire</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÉTAPE 3 : L'IA DANS TA VIE -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div style="background: linear-gradient(90deg, #3B82F6, #14B8A6); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">3</div>
+                </div>
+                <h2>📱 L'IA dans ta vie</h2>
+                <p class="lead">Où se cache l'IA dans ton quotidien ?</p>
+            </div>
+
+            <div class="content-card">
+                <p>Tu utilises de l'IA plusieurs fois par jour, souvent sans le savoir ! Découvre où elle se cache :</p>
+
+                <h3>🎵 Musique et divertissement</h3>
+                <ul>
+                    <li><strong>Spotify / Deezer :</strong> Playlists personnalisées, suggestions d'artistes</li>
+                    <li><strong>Netflix / Disney+ :</strong> Recommandations de séries et films</li>
+                    <li><strong>YouTube / TikTok :</strong> L'algorithme te propose des vidéos qui vont te plaire</li>
+                </ul>
+
+                <h3>📱 Réseaux sociaux</h3>
+                <ul>
+                    <li><strong>Instagram / Snapchat :</strong> Filtres en réalité augmentée, reconnaissance faciale</li>
+                    <li><strong>TikTok :</strong> Page "Pour Toi" ultra-personnalisée</li>
+                </ul>
+
+                <h3>🎓 À l'école</h3>
+                <ul>
+                    <li>ChatGPT pour expliquer des notions</li>
+                    <li>Traducteurs automatiques (DeepL, Google Translate)</li>
+                    <li>Correcteurs orthographiques</li>
+                    <li>Applications qui résolvent des équations en photo</li>
+                </ul>
+
+                <h3>🏥 Médecine</h3>
+                <ul>
+                    <li>Aide au diagnostic de maladies</li>
+                    <li>Analyse de radiographies</li>
+                    <li>Découverte de nouveaux médicaments</li>
+                </ul>
+
+                <h3>⚠️ Attention aux dangers</h3>
+                <ul>
+                    <li><strong>Désinformation :</strong> Deepfakes (fausses vidéos très réalistes)</li>
+                    <li><strong>Addiction :</strong> Les algorithmes sont conçus pour te garder connecté</li>
+                    <li><strong>Vie privée :</strong> L'IA analyse tes données personnelles</li>
+                </ul>
+            </div>
+
+            <div class="memo-card">
+                <h4>💡 MÉMO #3 - L'IA EST PARTOUT</h4>
+                <p><strong>🎵 Musique :</strong> Spotify, YouTube</p>
+                <p><strong>📱 Réseaux :</strong> Filtres, suggestions</p>
+                <p><strong>🎓 École :</strong> Aide aux devoirs, traduction</p>
+                <p><strong>🏥 Santé :</strong> Diagnostic, recherche</p>
+                <p><strong>⚠️ ATTENTION :</strong> Deepfakes, addiction, vie privée</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÉTAPE 4 : LES BONS PROMPTS -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div style="background: linear-gradient(90deg, #3B82F6, #14B8A6); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">4</div>
+                </div>
+                <h2>✍️ Bien utiliser l'IA - Les prompts</h2>
+                <p class="lead">Apprends à communiquer efficacement avec l'IA</p>
+            </div>
+
+            <div class="content-card">
+                <h3>C'est quoi un prompt ?</h3>
+                <p>Un <strong>prompt</strong>, c'est l'instruction que tu donnes à une IA pour lui dire ce que tu veux qu'elle fasse.</p>
+                <p><em>Exemples :</em> "Explique-moi la photosynthèse", "Crée une image d'un chat astronaute"</p>
+                <p><strong>Plus ton prompt est précis, meilleur sera le résultat !</strong></p>
+
+                <h3>Les 4 règles d'or d'un bon prompt</h3>
+                
+                <p><strong>1️⃣ SOIS PRÉCIS ET DÉTAILLÉ</strong></p>
+                <p>❌ Mauvais : "Parle-moi de l'histoire"</p>
+                <p>✅ Bon : "Explique-moi les causes de la Première Guerre mondiale en 5 points principaux"</p>
+
+                <p><strong>2️⃣ DONNE DU CONTEXTE</strong></p>
+                <p>❌ Mauvais : "Écris un texte"</p>
+                <p>✅ Bon : "Écris un paragraphe de 100 mots pour un exposé de 3ème expliquant ce qu'est un écosystème"</p>
+
+                <p><strong>3️⃣ INDIQUE LE FORMAT SOUHAITÉ</strong></p>
+                <p>❌ Mauvais : "Donne-moi des infos sur les planètes"</p>
+                <p>✅ Bon : "Fais-moi un tableau comparatif des 8 planètes avec : nom, distance du Soleil, taille"</p>
+
+                <p><strong>4️⃣ VÉRIFIE ET AMÉLIORE</strong></p>
+                <p>Ton premier prompt n'est jamais parfait ! Améliore-le en fonction du résultat.</p>
+            </div>
+
+            <div class="memo-card">
+                <h4>💡 MÉMO #4 - LES 4 RÈGLES D'OR</h4>
+                <p><strong>1️⃣ SOIS PRÉCIS</strong> - Détaille ce que tu veux</p>
+                <p><strong>2️⃣ DONNE DU CONTEXTE</strong> - Qui, quoi, pour quoi faire</p>
+                <p><strong>3️⃣ INDIQUE LE FORMAT</strong> - Liste, tableau, paragraphe...</p>
+                <p><strong>4️⃣ VÉRIFIE ET AMÉLIORE</strong> - Ton 1er prompt n'est jamais parfait !</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÉTAPE 5 : USAGE RESPONSABLE -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div style="background: linear-gradient(90deg, #3B82F6, #14B8A6); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">5</div>
+                </div>
+                <h2>🛡️ Utiliser l'IA de façon responsable</h2>
+                <p class="lead">Adopte un usage éthique et intelligent</p>
+            </div>
+
+            <div class="content-card">
+                <h3>Ce que tu PEUX faire ✅</h3>
+                <ul>
+                    <li><strong>Comprendre une notion difficile</strong> - Demande à l'IA d'expliquer simplement</li>
+                    <li><strong>Avoir des idées</strong> - Utilise l'IA pour t'inspirer et démarrer</li>
+                    <li><strong>Corriger ton orthographe</strong> - Vérifie ton texte avec l'IA</li>
+                    <li><strong>Traduire des textes</strong> - Comprendre des contenus en langue étrangère</li>
+                    <li><strong>Créer des illustrations</strong> - Pour enrichir tes projets</li>
+                    <li><strong>Structurer tes idées</strong> - L'IA peut t'aider à organiser ta pensée</li>
+                </ul>
+
+                <h3>Ce que tu NE DOIS PAS faire ❌</h3>
+                <ul>
+                    <li><strong>Copier-coller directement</strong> - C'est de la TRICHE ! Tu n'apprends rien</li>
+                    <li><strong>Faire tes devoirs avec l'IA</strong> - Tu ne progresseras pas</li>
+                    <li><strong>Croire tout sans vérifier</strong> - L'IA peut se tromper (hallucinations)</li>
+                    <li><strong>Partager tes infos personnelles</strong> - JAMAIS ton nom, adresse, photos...</li>
+                    <li><strong>Harceler ou tromper</strong> - Créer des deepfakes, usurper une identité</li>
+                </ul>
+
+                <h3>🎯 Règle d'or</h3>
+                <div style="background: linear-gradient(135deg, #DBEAFE, #BFDBFE); padding: 24px; border-radius: 12px; border: 2px solid #93C5FD; margin: 24px 0;">
+                    <p style="font-size: 20px; font-weight: bold; color: #1E40AF; text-align: center;">
+                        L'IA EST UN OUTIL POUR T'AIDER À APPRENDRE,<br>
+                        PAS POUR FAIRE LE TRAVAIL À TA PLACE
+                    </p>
+                </div>
+
+                <h3>⚠️ L'IA se trompe parfois</h3>
+                <p>L'IA peut faire des "hallucinations" : inventer des dates, des citations, des faits qui semblent vrais mais sont faux.</p>
+                <p><strong>☑️ Toujours vérifier dans plusieurs sources fiables !</strong></p>
+            </div>
+
+            <div class="memo-card">
+                <h4>💡 MÉMO #5 - USAGE RESPONSABLE</h4>
+                <p><strong>✅ TU PEUX :</strong> Comprendre, avoir des idées, corriger, traduire, structurer</p>
+                <p><strong>❌ TU NE DOIS PAS :</strong> Copier-coller, faire tes devoirs, croire tout, partager tes infos</p>
+                <p><strong>🎯 RÈGLE D'OR :</strong> L'IA = outil pour APPRENDRE, pas pour faire à ta place</p>
+                <p><strong>⚠️ L'IA SE TROMPE</strong> - Toujours vérifier !</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ FINAL -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎯 Quiz final d'évaluation</h2>
+                <p class="lead">Teste tes connaissances avec 7 questions !</p>
+            </div>
+            
+            <div id="quiz-root"></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: #111827; color: white; padding: 40px 24px; text-align: center;">
+        <p style="font-size: 16px;">🤖 IA Academy - Apprends l'intelligence artificielle</p>
+    </footer>
+
+    <!-- QUIZ REACT -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        const QuizIA = () => {
+          const [currentQuestion, setCurrentQuestion] = useState(0);
+          const [selectedAnswer, setSelectedAnswer] = useState(null);
+          const [showFeedback, setShowFeedback] = useState(false);
+          const [score, setScore] = useState(0);
+          const [quizCompleted, setQuizCompleted] = useState(false);
+
+          const questions = [
+            {
+              question: "Comment les chercheurs ont-ils tenté de simuler l'intelligence humaine ?",
+              options: [
+                "En reproduisant les fonctions cognitives",
+                "En créant des robots physiques",
+                "En étudiant les animaux",
+                "En développant des jeux vidéo"
+              ],
+              correctAnswer: 0,
+              explanation: "Les chercheurs ont cherché à reproduire les fonctions cognitives comme la mémoire, le raisonnement et l'apprentissage."
+            },
+            {
+              question: "Pourquoi est-il important de comprendre le fonctionnement de l'intelligence artificielle ?",
+              options: [
+                "Pour améliorer les réseaux sociaux",
+                "Pour remplacer les enseignants",
+                "Pour décider de ce que les systèmes peuvent faire pour nous",
+                "Pour créer des jeux vidéo plus complexes"
+              ],
+              correctAnswer: 2,
+              explanation: "Comprendre l'IA nous permet de contrôler son usage et de décider comment elle peut nous aider au quotidien."
+            },
+            {
+              question: "Qu'est-ce qu'un algorithme ?",
+              options: [
+                "Un programme informatique",
+                "Une série d'instructions à suivre dans un certain ordre",
+                "Un langage de programmation",
+                "Un type de machine"
+              ],
+              correctAnswer: 1,
+              explanation: "Un algorithme est comme une recette : c'est une série d'étapes précises à suivre pour résoudre un problème."
+            },
+            {
+              question: "Quel domaine n'est pas impacté par l'intelligence artificielle ?",
+              options: [
+                "L'agriculture",
+                "L'éducation",
+                "Aucun, tous les domaines sont touchés",
+                "La médecine"
+              ],
+              correctAnswer: 2,
+              explanation: "L'IA est partout : de la médecine à l'agriculture, en passant par l'éducation et même les arts !"
+            },
+            {
+              question: "Quel est un exemple d'application de l'intelligence artificielle dans la vie quotidienne ?",
+              options: [
+                "Les jeux de société",
+                "Les recommandations sur les réseaux sociaux",
+                "Les livres électroniques",
+                "Les téléviseurs classiques"
+              ],
+              correctAnswer: 1,
+              explanation: "Quand TikTok ou YouTube te suggère des vidéos que tu pourrais aimer, c'est de l'IA qui analyse tes préférences !"
+            },
+            {
+              question: "Quel événement a marqué un tournant dans l'histoire de l'intelligence artificielle en 1997 ?",
+              options: [
+                "Développement de l'apprentissage automatique",
+                "Lancement de Google",
+                "Création du premier smartphone",
+                "Deep Blue bat Garry Kasparov aux échecs"
+              ],
+              correctAnswer: 3,
+              explanation: "En 1997, l'ordinateur Deep Blue d'IBM a battu le champion du monde d'échecs Garry Kasparov, prouvant que l'IA pouvait surpasser l'humain dans certains domaines."
+            },
+            {
+              question: "Quelle est la différence entre l'intelligence biologique et l'intelligence artificielle ?",
+              options: [
+                "L'intelligence artificielle ne peut pas apprendre",
+                "L'intelligence biologique inclut des émotions et de la créativité",
+                "L'intelligence artificielle est toujours plus rapide",
+                "L'intelligence biologique est uniquement humaine"
+              ],
+              correctAnswer: 1,
+              explanation: "L'intelligence humaine a des émotions, de l'intuition et de la créativité que l'IA ne possède pas (pour l'instant !)."
+            }
+          ];
+
+          const handleAnswerClick = (index) => {
+            if (showFeedback) return;
+            
+            setSelectedAnswer(index);
+            setShowFeedback(true);
+            
+            if (index === questions[currentQuestion].correctAnswer) {
+              setScore(score + 1);
+            }
+          };
+
+          const handleNextQuestion = () => {
+            if (currentQuestion < questions.length - 1) {
+              setCurrentQuestion(currentQuestion + 1);
+              setSelectedAnswer(null);
+              setShowFeedback(false);
+            } else {
+              setQuizCompleted(true);
+            }
+          };
+
+          const restartQuiz = () => {
+            setCurrentQuestion(0);
+            setSelectedAnswer(null);
+            setShowFeedback(false);
+            setScore(0);
+            setQuizCompleted(false);
+          };
+
+          const getScoreMessage = () => {
+            const percentage = (score / questions.length) * 100;
+            if (percentage === 100) return "🏆 Parfait ! Tu es un expert de l'IA !";
+            if (percentage >= 80) return "🎉 Bravo ! Tu maîtrises bien le sujet !";
+            if (percentage >= 60) return "👍 Pas mal ! Continue comme ça !";
+            if (percentage >= 40) return "💪 Encore un petit effort, tu y es presque !";
+            return "📚 Retourne voir le cours, tu vas progresser !";
+          };
+
+          if (quizCompleted) {
+            const percentage = (score / questions.length) * 100;
+            
+            return (
+              <div style={{
+                background: 'white',
+                borderRadius: '24px',
+                padding: '48px',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.15)',
+                textAlign: 'center'
+              }}>
+                <div style={{ fontSize: '64px', marginBottom: '24px' }}>
+                  {percentage === 100 ? '🏆' : percentage >= 60 ? '🎉' : '💪'}
+                </div>
+                
+                <h2 style={{ fontSize: '36px', fontWeight: 'bold', color: '#111827', marginBottom: '16px' }}>
+                  Quiz terminé !
+                </h2>
+                
+                <div style={{
+                  fontSize: '72px',
+                  fontWeight: 'bold',
+                  background: 'linear-gradient(90deg, #3B82F6, #14B8A6)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  marginBottom: '24px'
+                }}>
+                  {score}/{questions.length}
+                </div>
+                
+                <p style={{ fontSize: '24px', color: '#374151', marginBottom: '32px' }}>
+                  {getScoreMessage()}
+                </p>
+                
+                <div style={{
+                  background: 'linear-gradient(135deg, #EFF6FF, #F0FDFA)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  marginBottom: '32px'
+                }}>
+                  <p style={{ fontSize: '18px', color: '#374151' }}>
+                    Ton score : <strong>{percentage.toFixed(0)}%</strong>
+                  </p>
+                </div>
+                
+                <button
+                  onClick={restartQuiz}
+                  style={{
+                    background: 'linear-gradient(90deg, #3B82F6, #14B8A6)',
+                    color: 'white',
+                    border: 'none',
+                    padding: '16px 40px',
+                    fontSize: '18px',
+                    fontWeight: '600',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    boxShadow: '0 10px 15px rgba(0,0,0,0.1)',
+                    transition: 'transform 0.3s, box-shadow 0.3s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'scale(1.05)';
+                    e.target.style.boxShadow = '0 20px 25px rgba(0,0,0,0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'scale(1)';
+                    e.target.style.boxShadow = '0 10px 15px rgba(0,0,0,0.1)';
+                  }}
+                >
+                  🔄 Recommencer le quiz
+                </button>
+              </div>
+            );
+          }
+
+          const currentQ = questions[currentQuestion];
+
+          return (
+            <div>
+              <div style={{
+                background: 'white',
+                borderRadius: '16px',
+                padding: '24px',
+                marginBottom: '24px',
+                boxShadow: '0 10px 15px rgba(0,0,0,0.1)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '16px'
+              }}>
+                <div>
+                  <p style={{ fontSize: '14px', color: '#6B7280', marginBottom: '8px' }}>
+                    Question {currentQuestion + 1} sur {questions.length}
+                  </p>
+                  <div style={{
+                    width: '200px',
+                    height: '8px',
+                    background: '#E5E7EB',
+                    borderRadius: '9999px',
+                    overflow: 'hidden'
+                  }}>
+                    <div style={{
+                      height: '100%',
+                      width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+                      background: 'linear-gradient(90deg, #3B82F6, #14B8A6)',
+                      transition: 'width 0.5s ease'
+                    }} />
+                  </div>
+                </div>
+                
+                <div style={{
+                  background: 'linear-gradient(135deg, #3B82F6, #14B8A6)',
+                  color: 'white',
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  fontSize: '20px'
+                }}>
+                  Score : {score}/{questions.length}
+                </div>
+              </div>
+
+              <div style={{
+                background: 'white',
+                borderRadius: '24px',
+                padding: '40px',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.15)',
+                borderTop: '4px solid #3B82F6'
+              }}>
+                <h3 style={{
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '32px',
+                  lineHeight: '1.4'
+                }}>
+                  {currentQ.question}
+                </h3>
+
+                <div style={{ display: 'grid', gap: '16px' }}>
+                  {currentQ.options.map((option, index) => {
+                    const isSelected = selectedAnswer === index;
+                    const isCorrect = index === currentQ.correctAnswer;
+                    
+                    let backgroundColor = 'white';
+                    let borderColor = '#E5E7EB';
+                    let textColor = '#374151';
+                    
+                    if (showFeedback) {
+                      if (isCorrect) {
+                        backgroundColor = '#DCFCE7';
+                        borderColor = '#86EFAC';
+                        textColor = '#065F46';
+                      } else if (isSelected && !isCorrect) {
+                        backgroundColor = '#FEE2E2';
+                        borderColor = '#FCA5A5';
+                        textColor = '#991B1B';
+                      }
+                    } else if (isSelected) {
+                      backgroundColor = '#EFF6FF';
+                      borderColor = '#3B82F6';
+                    }
+
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleAnswerClick(index)}
+                        disabled={showFeedback}
+                        style={{
+                          background: backgroundColor,
+                          border: `2px solid ${borderColor}`,
+                          borderRadius: '12px',
+                          padding: '20px 24px',
+                          fontSize: '18px',
+                          textAlign: 'left',
+                          cursor: showFeedback ? 'default' : 'pointer',
+                          transition: 'all 0.3s',
+                          color: textColor,
+                          fontWeight: isSelected ? '600' : '400',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '16px'
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!showFeedback) {
+                            e.target.style.transform = 'scale(1.02)';
+                            e.target.style.boxShadow = '0 10px 15px rgba(0,0,0,0.1)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.transform = 'scale(1)';
+                          e.target.style.boxShadow = 'none';
+                        }}
+                      >
+                        <span style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '50%',
+                          background: showFeedback && isCorrect ? '#10B981' : 
+                                     showFeedback && isSelected && !isCorrect ? '#EF4444' :
+                                     isSelected ? '#3B82F6' : '#E5E7EB',
+                          color: isSelected || (showFeedback && isCorrect) ? 'white' : '#374151',
+                          fontWeight: 'bold',
+                          fontSize: '18px',
+                          flexShrink: 0
+                        }}>
+                          {showFeedback && isCorrect ? '✓' : 
+                           showFeedback && isSelected && !isCorrect ? '✗' :
+                           String.fromCharCode(97 + index)}
+                        </span>
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {showFeedback && (
+                  <div style={{
+                    marginTop: '32px',
+                    padding: '24px',
+                    background: selectedAnswer === currentQ.correctAnswer ? 
+                      'linear-gradient(135deg, #DCFCE7, #D1FAE5)' : 
+                      'linear-gradient(135deg, #FEE2E2, #FECACA)',
+                    borderRadius: '16px',
+                    borderLeft: `4px solid ${selectedAnswer === currentQ.correctAnswer ? '#10B981' : '#EF4444'}`
+                  }}>
+                    <p style={{
+                      fontSize: '20px',
+                      fontWeight: 'bold',
+                      color: selectedAnswer === currentQ.correctAnswer ? '#065F46' : '#991B1B',
+                      marginBottom: '12px'
+                    }}>
+                      {selectedAnswer === currentQ.correctAnswer ? '🎉 Bravo ! Bonne réponse !' : '❌ Oups ! Mauvaise réponse'}
+                    </p>
+                    <p style={{
+                      fontSize: '16px',
+                      color: '#374151',
+                      lineHeight: '1.6'
+                    }}>
+                      {currentQ.explanation}
+                    </p>
+                  </div>
+                )}
+
+                {showFeedback && (
+                  <button
+                    onClick={handleNextQuestion}
+                    style={{
+                      marginTop: '32px',
+                      width: '100%',
+                      background: 'linear-gradient(90deg, #F97316, #F59E0B)',
+                      color: 'white',
+                      border: 'none',
+                      padding: '16px 32px',
+                      fontSize: '18px',
+                      fontWeight: '600',
+                      borderRadius: '12px',
+                      cursor: 'pointer',
+                      boxShadow: '0 10px 15px rgba(0,0,0,0.1)',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'scale(1.02)';
+                      e.target.style.boxShadow = '0 20px 25px rgba(0,0,0,0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'scale(1)';
+                      e.target.style.boxShadow = '0 10px 15px rgba(0,0,0,0.1)';
+                    }}
+                  >
+                    {currentQuestion < questions.length - 1 ? 'Question suivante →' : 'Voir mes résultats 🎯'}
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        };
+
+        ReactDOM.render(<QuizIA />, document.getElementById('quiz-root'));
+    </script>
+</body>
+</html>
